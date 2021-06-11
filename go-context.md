@@ -1,0 +1,39 @@
+## Context Package
+- Context is immutable
+- The Context package provides functions to add new behavior.
+- To add cancellation behavior we have functions like:
+    - `context.WithCancel()`
+    - `context.WithTimeout()`
+    - `context.WithDeadline()`
+- The derived context is passed to the children goroutines to facilitate their cancellation.
+---
+
+## Example Go Code using context
+- `WithCancel()` Example:
+    - Creates a context that is cancellable
+    - `ctx, cancel := context.WithCancel(context.Background())`
+    - `defer cancel()`
+    - `WithCancel` returns a copy of the parent context with a new 'Done' channel.
+    - `cancel()` can be used to close the context's done channel.
+    - Closing the done channel indicates to an operation to abandon its work and return.
+    - Canceling the context releases the resources associated with it.
+    - It's very important that we call the cancel function as soon as the operation running the context is complete.
+    - If we don't, there will be a memory leak.
+    - The resources that are associated with the context won't be released until the current context is cancelled or the parent context is cancelled.
+    - `cancel()` does not wait for the work to stop.
+    - `cancel()` may be called by multiple goroutines simultaneously.
+    - After the first call, the subsequent calls to `cancel()` do nothing.
+    - Full Example:
+      - `ctx, cancel := context.WithCancel(context,Background())`
+      - `ch := generator(ctx)`
+      - `if n == 5 {`
+      -   `cancel()`
+      - `}` - This is the parent Goroutine
+      - `for {`
+      -   `select {`
+      -   `case <-ctx.Done():`
+      -    `return ctx.Err()`
+      -    ` dst <- n:`
+      -    `n++`
+      -    `}`
+      -   `}` - This is the child Goroutine
