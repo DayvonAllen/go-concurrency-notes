@@ -48,6 +48,7 @@
   - `defer cancel()`
   - `WithDeadline()` takes the parent context and clock time as input
   - `WithDeadline()` returns a new context that closes its done channel when the machine's clock advances past the given deadline.
+  - `ctx.Deadline()` can be used to find out if a deadline is associated with the context.
   - `ok` is a boolean, it will be true if the deadline is set and false if otherwise.
   - Full Example:
     - `deadline, ok := ctx.Deadline()`
