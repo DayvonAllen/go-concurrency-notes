@@ -8,9 +8,11 @@
 - The derived context is passed to the children goroutines to facilitate their cancellation.
 ---
 
-## Example Go Code using context
-- `WithCancel()` Example:
+## Example Go Code using WithCancel context
+- `WithCancel()` Examples and Explanations:
     - Creates a context that is cancellable
+    - The `context.Background()` functions creates a root context.
+    - The `context.WithCancel` is creating a cancellable context from the root context.
     - `ctx, cancel := context.WithCancel(context.Background())`
     - `defer cancel()`
     - `WithCancel` returns a copy of the parent context with a new 'Done' channel.
@@ -37,3 +39,43 @@
       -    `n++`
       -    `}`
       -   `}` - This is the child Goroutine
+---
+
+## Example Go Code using WithDeadline context
+- `WithDeadline()` Examples and Explanations:
+  - `deadline := time.Now().Add(5 * time.Millisecond)`
+  - `ctx, cancel := context.WithDeadline(context.Background(), deadline)`
+  - `defer cancel()`
+  - `WithDeadline()` takes the parent context and clock time as input
+  - `WithDeadline()` returns a new context that closes its done channel when the machine's clock advances past the given deadline.
+  - `ok` is a boolean, it will be true if the deadline is set and false if otherwise.
+  - Full Example:
+    - `deadline, ok := ctx.Deadline()`
+    - `if ok {`
+    - `if deadline.Sub(time.Now().Add(10*time.Millisecond)) <= 0 {`
+    - `return context.DeadlineExceeded`
+    - `}`
+    - `}` - Parent Go routine
+    - `for {`
+    - `select {`
+    - `case <-ctx.Done():`
+    - `return ctx.Err()`
+    - `case dst <- n:`
+    - `n++`
+    - `}`
+    - `}` - child Go routine
+---
+
+## Example Go Code using WithTimeout context
+- `WithTimeout()` Examples and Explanations:
+  - `duration := 5 * time.Millisecond`
+  - `ctx, cancel := context.WithTimeout(context.Background(), duration)`
+  - `defer cancel()`
+  - `WithTimeout()` takes the parent context and a time duration as input
+  - `WithTimeout()` returns a new context that closes its done channel after the given timeout duration.
+  - `WithTimeout()` is useful for setting a deadline on the requests to backend servers.
+  - `WithTimeout()` is a wrapper over `WithDeadline()`
+  - `WithTimeout()` - timer count down begins from the moment the context is created.
+  - `WithDeadline()` - Set explicit time when the timer will expire. We get more control over the timer expiration with this one.
+
+
