@@ -1,4 +1,8 @@
 ## Context Package
+- Context package serves two primary purposes:
+  - Provides API's for cancelling branches of call-graph.
+  - Provides a data-bag for transporting request-scoped data through call-graph.
+- `context.Background()` - returns an empty context, it is the root of any Context tree.
 - Context is immutable
 - The Context package provides functions to add new behavior.
 - To add cancellation behavior we have functions like:
@@ -78,5 +82,13 @@
   - `WithTimeout()` is a wrapper over `WithDeadline()`
   - `WithTimeout()` - timer count down begins from the moment the context is created.
   - `WithDeadline()` - Set explicit time when the timer will expire. We get more control over the timer expiration with this one.
+---
 
-
+## Example Go Code using WithValue context
+-  `context.WithValue()` provides a way to associate request-scoped values with a context.
+   -  `type userIDType string`
+   -  `ctx := context.WithValue(context.Background(), userIDType("userIDKey"), "jane")` - parent Go routine
+   -  `userid := ctx.Value(userIDType("userIDKey")).(userIDType)` - child Go routine
+- The context package can be used as a data bag to carry request-scoped data.
+- `context.WithValue()` - used to associate request-scoped data with a context.
+- `ctx.Value()` - is used to extract the value by giving it a key and it will fetch the value from the context.
