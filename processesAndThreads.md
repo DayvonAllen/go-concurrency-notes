@@ -67,14 +67,14 @@
 - The Scheduler allocates a process a time slice for execution on a CPU core.
 - This CPU time slice is divided equally among threads in the process.
     | Scheduler Period | Number of threads | Thread time slice |
-    | :--------------- | :---------------: | ----------------- |
+    | :--------------- | :---------------: | -----------------:|
     | 10 milliseconds  |         2         | 5 milliseconds    |
     | 10 milliseconds  |         5         | 2 milliseconds    |
     | 10 milliseconds  |       1000        | 10 microseconds   |
 - In the last example in the table with 1000 threads, the CPU will spend more time context switching then running the application.
 - To do any meaningful job, a thread needs a time slice of at least 2 milliseconds:
     | Scheduler Period | Number of threads | Thread time slice |
-    | :--------------- | :---------------: | ----------------- |
+    | :--------------- | :---------------: | -----------------:|
     | 2 seconds        |       1000        | 2 milliseconds    |
     | 20 seconds       |      10,000       | 2 milliseconds    |
 - If there 1,000 threads it will take 2 seconds to complete 1 cycle(we will have to wait for 2 seconds for the next execution of threads), if there are 10,000 threads then it will take 20 seconds to complete 1 cycle(we will have to wait for 20 seconds for the next execution of threads).
