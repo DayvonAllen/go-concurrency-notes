@@ -17,7 +17,7 @@
 
 ## Misc
 - In computing, preemption is the act of temporarily interrupting an executing task, with the intention of resuming it at a later time.
-- When a thread gets preempted, it gets interrupted and resume execution later. It's like a temporary pause before it finishes execution.
+- When a thread gets preempted, it gets interrupted and resumes execution later. It's like a temporary pause before it finishes execution.
 
 ## Threads
 - Threads are the smallest unit of execution that a CPU accepts.
