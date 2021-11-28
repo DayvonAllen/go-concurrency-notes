@@ -18,6 +18,7 @@
 ## Misc
 - In computing, preemption is the act of temporarily interrupting an executing task, with the intention of resuming it at a later time.
 - When a thread gets preempted, it gets interrupted and resumes execution later. It's like a temporary pause before it finishes execution.
+---
 
 ## Threads
 - Threads are the smallest unit of execution that a CPU accepts.
@@ -58,7 +59,7 @@
   - Stack
 - Context switches are expensive.
 - The CPU has to spend time copying the context of the current executing thread into memory and restoring the context of the next chosen thread.
-- It takes thousands of CPU instructions to do context switching and it is a waste of time because when there is context switching going on the CPU is not running your application.
+- It takes thousands of CPU instructions to do context switching, and it is a waste of time because when there is context switching going on the CPU is not running your application.
 - Context switching of threads in the same process is relatively cheap compared to context switching of threads that are related to a different process.
 ---
 
@@ -73,7 +74,7 @@
     | 10 milliseconds  |         5         | 2 milliseconds    |
     | 10 milliseconds  |       1000        | 10 microseconds   |
     
-- In the last example in the table with 1000 threads, the CPU will spend more time context switching then running the application.
+- In the last example in the table with 1000 threads, the CPU will spend more time context switching than running the application.
 - To do any meaningful job, a thread needs a time slice of at least 2 milliseconds:
   
     | Scheduler Period | Number of threads | Thread time slice |
@@ -81,10 +82,11 @@
     | 2 seconds        |       1000        | 2 milliseconds    |
     | 20 seconds       |      10,000       | 2 milliseconds    |
 
-- If there 1,000 threads it will take 2 seconds to complete 1 cycle(we will have to wait for 2 seconds for the next execution of threads), if there are 10,000 threads then it will take 20 seconds to complete 1 cycle(we will have to wait for 20 seconds for the next execution of threads).
+- If there are 1,000 threads it will take 2 seconds to complete 1 cycle(we will have to wait for 2 seconds for the next execution of threads), if there are 10,000 threads then it will take 20 seconds to complete 1 cycle(we will have to wait for 20 seconds for the next execution of threads).
   - In those cases the application will become less responsive.
-- Another issue is the stack size(typically it's 8MB), The OS gives a fixed stack size for each thread. The actual size depends on the hardware.
-- If you have 8GB in memory(RAM) and the fixed stack size for each thread is 8MB then you can only create 1000 threads.
+- Another issue is the stack size(typically it's 8mb), The OS gives a fixed stack size for each thread. The actual size depends on the hardware.
+- If you have 8gb in memory(RAM) and the fixed stack size for each thread is 8mb then you can only create 1000 threads.
 - The fixed stack size limits the number of threads that we can create to the amount of memory(RAM) that we have.
 - In summary:
   - C10K problem = as we scale up the number of threads, the scheduler cycle increases and the application can become less responsive.
+---

@@ -24,8 +24,8 @@
 
 ## Go-routines
 - We can think of go-routines as user space threads managed by the go runtime.
-- The go runtime is apart of the executable, it is built into the executable of the application.
-- Go-routines are extremely lightweight. Their stacks start with at 2KB, which can shrink and grow as required.
+- The go runtime is a part of the executable, it is built into the executable of the application.
+- Go-routines are extremely lightweight. Their stacks start with 2kb memory, which can shrink and grow as required.
 - Go-routines have a low CPU overhead - it takes three instructions per function call.
 - We can create hundreds of thousands of go-routines in the same address space.
 - Channels are used for communication of data between go-routines. Sharing of memory can be avoided.
@@ -36,3 +36,4 @@
     2. Go-routines runs in the context of OS threads. Many go-routines can operate in the context of a single OS thread.
     3. The OS schedules OS threads
     4. The go runtime schedules multiple go-routines on an OS thread. Nothing changes for the OS.
+---

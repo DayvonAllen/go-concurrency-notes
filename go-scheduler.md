@@ -12,8 +12,8 @@
 
 ## Asynchronous Preemption
 - As of Go 1.14, The Go scheduler implements asynchronous preemption.
-- This prevents long running go-routines from hogging the CPU, which could block other go-routines.
-- The asynchronour preemption is triggered based on a time condition
+- This prevents long-running go-routines from hogging the CPU, which could block other go-routines.
+- The asynchronous preemption is triggered based on a time condition
   - When a go-routine is running for more than 10ms, Go will try to preempt it.
 ---
 
@@ -24,5 +24,6 @@
    - It moves to the executing state once the go-routine is scheduled on the OS thread.
    - If the go-routine runs through its time slice, it is preempted and placed back into the ready queue.
 3. `Waiting` State:
-   -  If the go-routine is executing and it gets block on any condition, like blocked on the channel, blocked on a syscall or waiting for a mutex lock, then it is moved to the 'Waiting state'
-   -  Once the I/O operation is complete it is moved back the Runnable state.
+   - If the go-routine is executing, and it gets block on any condition, like blocked on the channel, blocked on a syscall or waiting for a mutex lock, then it is moved to the 'Waiting state'
+   - Once the I/O operation is complete it is moved back the Runnable state.
+---

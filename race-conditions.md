@@ -7,3 +7,4 @@
 - The binary build needs to be race enabled
 - When racy behavior is detected a warning is printed.
 - Race enabled binary will be 10 times slower and consume 10 times more memory.
+---

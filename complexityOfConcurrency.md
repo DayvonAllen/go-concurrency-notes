@@ -1,5 +1,5 @@
 ## Shared Memory
-- Threads communicate between each other by sharing memory.
+- Threads communicate with each other by sharing memory.
 - Sharing of memory between threads creates a lot of complexity.
 - Concurrent access to shared memory by two or more threads can lead to a 'Data Race' and the outcome can be 'Un-deterministic'
     - Usually when a thread is writing to a resource while another thread is reading from that same resource

@@ -28,7 +28,10 @@ func log(w io.Writer, val string) {
 	b.WriteString(val)
 	b.WriteString("\n")
 
-	w.Write(b.Bytes())
+	_, err := w.Write(b.Bytes())
+	if err != nil {
+		return 
+	}
 
 	// put buffer back into the buffer pool
 	bufPool.Put(b)

@@ -85,10 +85,11 @@
 ---
 
 ## Example Go Code using WithValue context
--  `context.WithValue()` provides a way to associate request-scoped values with a context.
+- `context.WithValue()` provides a way to associate request-scoped values with a context.
    -  `type userIDType string`
    -  `ctx := context.WithValue(context.Background(), userIDType("userIDKey"), "jane")` - parent Go routine
    -  `userid := ctx.Value(userIDType("userIDKey")).(userIDType)` - child Go routine
 - The context package can be used as a data bag to carry request-scoped data.
 - `context.WithValue()` - used to associate request-scoped data with a context.
-- `ctx.Value()` - is used to extract the value by giving it a key and it will fetch the value from the context.
+- `ctx.Value()` - is used to extract the value by giving it a key, and it will fetch the value from the context.
+---
