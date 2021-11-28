@@ -8,11 +8,11 @@ func genMsg(ch1 chan<- string) {
 	ch1 <- "message"
 }
 
-func relayMsg(ch1 <-chan string, ch2 chan<- string) {
-	// receive message on ch1
-	m := <-ch1
-	// send it on ch2
-	ch2 <- m
+func relayMsg(recOnlyChan <-chan string, sendOnlyChan chan<- string) {
+	// receive message on recOnlyChan
+	m := <-recOnlyChan
+	// send it on sendOnlyChan
+	sendOnlyChan <- m
 }
 
 func ChannelDirection() {
